@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Your Presentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Reveal.js -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/theme/black.css" id="theme">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <!-- OLS -->
+            <section>
+                <div>
+                    <em style="display:block;text-align:center;width:100%">Sales = <span id="olsIntercept">10000</span>
+                        + <span id="olsCoef">2</span>&#215;Media Spend</em>
+                </div>
+
+                <div class="slide-wrapper">
+                    <div class="input-controls">
+                        <div>
+                            <label for="slope">Coefficient: <span id="slopeSales">2</span></label><br>
+                            <input type="range" id="slope" name="slope" min="0" max="5" step="0.5" value="2">
+                        </div>
+                        <div style="margin-top:10px">
+                            <label for="intercept">Intercept: <span id="interceptSales">10000</span></label><br>
+                            <input type="range" id="intercept" name="intercept" min="0" max="20000" step="1000"
+                                value="10000">
+                        </div>
+                        <div style="margin-top:20px">
+                            <button id="resetButton1">Reset Sliders</button>
+                        </div>
+                    </div>
+                    <canvas id="regressionChart" width="500" height="500"></canvas>
+                </div>
+
+            </section>
+
+            <!-- Time Series -->
+            <section>
+
+                <div>
+                    <em style="display:block;text-align:center;width:100%">Sales = <span
+                            id="olsTsIntercept">10000</span> + <span id="olsTsCoef">2</span>&#215;Media Spend</em>
+                </div>
+                <div class="slide-wrapper">
+                    <div class="input-controls">
+                        <div>
+                            <label for="coefficient">Coefficient: <br> <span id="bValue">2</span></label><br>
+                            <input type="range" id="tsCoefficient" name="tsCoefficient" min="0" max="3" step="0.1"
+                                value="2">
+                        </div>
+                        <div style="margin-top:10px">
+                            <label for="base">Base: <span id="baseValue">10000</span></label><br>
+                            <input type="range" id="tsBase" name="tsBase" min="0" max="20000" step="1000" value="10000">
+                        </div>
+                        <div style="margin-top:20px">
+                            <button id="resetButton2">Reset Sliders</button>
+                        </div>
+                    </div>
+                    <canvas id="olsChart" width="500" height="300"></canvas>
+                </div>
+
+                <script>
+                </script>
+            </section>
+
+            <!-- Adstock -->
+            <section>
+
+                <div>
+                    <em style="display:block;text-align:center;width:100%">Sales = 10,000 + 2&#215;Adstock(Media Spend ,
+                        <span id="adsRate">50%</span>)</em>
+                </div>
+
+                <div class="slide-wrapper">
+                    <div class="input-controls">
+                        <div>
+                            <label for="rate">Adstock Rate: <span id="rateValue">50%</span></label><br>
+                            <input type="range" id="rate" name="rate" min="0" max="1" step="0.1" value="0.5">
+                        </div>
+                    </div>
+                    <canvas id="adstockChart" width="500" height="300"></canvas>
+                </div>
+            </section>
+
+            <!-- Diminishing Returns -->
+            <section>            
+                <div>
+                    <em style="display:block;text-align:center;width:100%">Sales = 10,000 + <span id="DimRetscoefficient">10000</span>&#215;DimRets(Media Spend ,
+                        <span id="DimRetsRate">10000</span>)</em>
+                </div>
+                <div class="slide-wrapper">
+                  <div class="input-controls">
+                    <div>
+                      <label for="rateDR">Diminishing Returns Rate: <span id="rateValueDR">10000</span></label><br>
+                      <input type="range" id="rateDR" name="rateDR" min="1000" max="50000" step="1000" value="10000">
+                    </div>
+                    <div style="margin-top:20px">
+                      <label for="coefficient">Coefficient: <span id="coefficientValue">10000</span></label><br>
+                      <input type="range" id="coefficient" name="coefficient" min="1000" max="50000" step="1000" value="10000">
+                    </div>
+                  </div>
+              
+                  <div style="display:flex; flex-direction:row; min-height: 600px;">
+                    <canvas id="mediaContributionChart" width="500" height="200"></canvas>
+                    <canvas id="diminishingChart" width="500" height="200"></canvas>
+                  </div>
+                </div>
+              </section>
+              
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/reveal.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,
+            slideNumber: false,
+            plugins: []
+        });
+    </script>
+</body>
+
+</html>
