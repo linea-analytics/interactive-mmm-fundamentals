@@ -1,4 +1,9 @@
- /* Slider styling (same as your original) */
+.slide-background-content, .reveal, .slides, body {
+    background-color: #f9fafb; 
+    color: black;
+  }
+
+/* Slider styling (same as your original) */
  input[type="range"] {
     -webkit-appearance: none;
     height: 8px;
@@ -13,7 +18,7 @@ input[type="range"]::-webkit-slider-thumb {
     appearance: none;
     width: 20px;
     height: 20px;
-    background: black;
+    background: #21caab;
     cursor: pointer;
     border-radius: 50%;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
@@ -22,7 +27,7 @@ input[type="range"]::-webkit-slider-thumb {
 
 input[type="range"]:hover::-webkit-slider-thumb,
 input[type="range"]:active::-webkit-slider-thumb {
-    background: #0056b3;
+    background: rgb(255, 0, 68);
 }
 
 input[type="range"]::-moz-range-thumb {
@@ -66,7 +71,6 @@ input[type="range"]::-ms-fill-upper {
 
 canvas {
     max-width: 600px;
-    /* height: auto; */
     margin-left: 40px;
 }
 
