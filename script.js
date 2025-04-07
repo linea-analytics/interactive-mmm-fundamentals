@@ -1,4 +1,3 @@
-
 // OLS -----------------------
 
 const ctx1 = document.getElementById('regressionChart').getContext('2d');
@@ -385,8 +384,9 @@ const diminishingChart = new Chart(ctxDR, {
 });
 
 const ctxContribution = document.getElementById('mediaContributionChart').getContext('2d');
-const mediaSpendRange = Array.from({ length: 20 }, (_, i) => i * 1000);
+const mediaSpendRange = Array.from({ length: 30 }, (_, i) => i * 1000);
 let mediaContributionRange = diminishingReturns(mediaSpendRange, rateDimRets).map(val => val * coefficientDimRets);
+let pointsData = mediaSpendDimRets.map((x, i) => ({ x: x, y: sales[i] - baseValueDimRets}));
 
 const mediaContributionChart = new Chart(ctxContribution, {
     type: 'line',
@@ -405,6 +405,8 @@ const mediaContributionChart = new Chart(ctxContribution, {
         responsive: true,
         scales: {
             x: {
+                min: Math.min(...mediaSpendDimRets), // Adjust dynamically
+                max: Math.max(...mediaSpendDimRets) + 2000,
                 title: {
                     display: true,
                     text: 'Media Spend'
@@ -412,7 +414,8 @@ const mediaContributionChart = new Chart(ctxContribution, {
                 grid: { display: false }
             },
             y: {
-                beginAtZero: true,
+                min: Math.min(...sales.map(s => s - baseValueDimRets)), // Adjust dynamically
+                max: Math.max(...sales.map(s => s - baseValueDimRets)) + 1000,
                 title: {
                     display: true,
                     text: 'Media Contribution'
@@ -423,8 +426,23 @@ const mediaContributionChart = new Chart(ctxContribution, {
     }
 });
 
+
+
+// Add a new dataset for points to the mediaContributionChart
+mediaContributionChart.data.datasets.push({
+    label: 'Sales Points',
+    data: pointsData, // Points data
+    backgroundColor: 'rgba(255, 99, 132, 1)', // Point color
+    type: 'scatter',
+    pointRadius: 5
+});
+
+// Update the chart to reflect the changes
+mediaContributionChart.update();
+
+// Update the points dynamically when the chart is updated
 function updateCharts() {
-    rateDimRets  = parseFloat(document.getElementById('rateDR').value);
+    rateDimRets = parseFloat(document.getElementById('rateDR').value);
     coefficientDimRets = parseFloat(document.getElementById('coefficient').value);
 
     document.getElementById('rateValueDR').textContent = rateDimRets;
@@ -438,9 +456,28 @@ function updateCharts() {
     diminishingChart.data.datasets[1].data = mediaContributionDimRets;
     mediaContributionChart.data.datasets[0].data = mediaContributionRange;
 
+    console.log(mediaContributionChart.data.datasets);
+
     diminishingChart.update();
     mediaContributionChart.update();
 }
 
+function resetDimRetsSliders() {
+    // Reset slider values to their defaults
+    document.getElementById('rateDR').value = 10000;
+    document.getElementById('coefficient').value = 10000;
+
+    // Update the displayed values
+    document.getElementById('rateValueDR').textContent = 10000;
+    document.getElementById('DimRetsRate').textContent = 10000;
+    document.getElementById('DimRetscoefficient').textContent = 10000;
+    document.getElementById('coefficientValue').textContent = 10000;
+
+    // Recalculate and update the charts
+    updateCharts();
+}
+
+// Add event listener for the reset button
+document.getElementById('resetButtonDimRets').addEventListener('click', resetDimRetsSliders);
 document.getElementById('rateDR').addEventListener('input', updateCharts);
 document.getElementById('coefficient').addEventListener('input', updateCharts);
