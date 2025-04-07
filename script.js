@@ -202,7 +202,7 @@ function updateChart2() {
     document.getElementById('bValue').textContent = b;
     document.getElementById('baseValue').textContent = base;
 
-    mediaContribution = calculateMediaContribution();
+    mediaContributionTs = calculateMediaContribution();
     olsChart.data.datasets[0].data = Array(mediaSpendTs.length).fill(base);
     olsChart.data.datasets[1].data = mediaContributionTs;
 
@@ -315,7 +315,7 @@ const mediaSpendDimRets = [0, 0, 0, 0, 20000, 0, 0, 5000, 0, 10000, 0, 0, 0, 0];
 const baseValueDimRets = 10000;
 
 let rateDimRets = 10000;
-let coefficientDimRets = 10000;
+let coefficientDimRets = 15000;
 
 function diminishingReturns(media, rate) {
     return media.map(value => 1 - Math.exp(-value / rate));
@@ -456,8 +456,6 @@ function updateCharts() {
     diminishingChart.data.datasets[1].data = mediaContributionDimRets;
     mediaContributionChart.data.datasets[0].data = mediaContributionRange;
 
-    console.log(mediaContributionChart.data.datasets);
-
     diminishingChart.update();
     mediaContributionChart.update();
 }
@@ -465,7 +463,7 @@ function updateCharts() {
 function resetDimRetsSliders() {
     // Reset slider values to their defaults
     document.getElementById('rateDR').value = 10000;
-    document.getElementById('coefficient').value = 10000;
+    document.getElementById('coefficient').value = 15000;
 
     // Update the displayed values
     document.getElementById('rateValueDR').textContent = 10000;
