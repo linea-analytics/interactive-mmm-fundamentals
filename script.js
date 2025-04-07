@@ -300,8 +300,8 @@ const adstockChart = new Chart(ctx3, {
 function updateChart3() {
     rate = parseFloat(document.getElementById('rate').value);
     document.getElementById('rateValue').textContent = (rate * 100).toFixed(0) + "%";
-    const adsRate = document.getElementById('adsRate');
-    adsRate.textContent = (rate * 100).toFixed(0) + "%";
+    // const adsRate = document.getElementById('adsRate');
+    // adsRate.textContent = (rate * 100).toFixed(0) + "%";
     mediaContribution = calculateMediaContributionAds(rate);
     adstockChart.data.datasets[1].data = mediaContribution;
     adstockChart.update();
@@ -426,8 +426,6 @@ const mediaContributionChart = new Chart(ctxContribution, {
     }
 });
 
-
-
 // Add a new dataset for points to the mediaContributionChart
 mediaContributionChart.data.datasets.push({
     label: 'Sales Points',
@@ -446,8 +444,8 @@ function updateCharts() {
     coefficientDimRets = parseFloat(document.getElementById('coefficient').value);
 
     document.getElementById('rateValueDR').textContent = rateDimRets;
-    document.getElementById('DimRetsRate').textContent = rateDimRets;
-    document.getElementById('DimRetscoefficient').textContent = coefficientDimRets;
+    // document.getElementById('DimRetsRate').textContent = rateDimRets;
+    // document.getElementById('DimRetscoefficient').textContent = coefficientDimRets;
     document.getElementById('coefficientValue').textContent = coefficientDimRets;
 
     mediaContributionDimRets = calculateMediaContributionDimRets(mediaSpendDimRets, rateDimRets, coefficientDimRets);
@@ -467,9 +465,9 @@ function resetDimRetsSliders() {
 
     // Update the displayed values
     document.getElementById('rateValueDR').textContent = 10000;
-    document.getElementById('DimRetsRate').textContent = 10000;
-    document.getElementById('DimRetscoefficient').textContent = 10000;
     document.getElementById('coefficientValue').textContent = 10000;
+    // document.getElementById('DimRetsRate').textContent = 10000;
+    // document.getElementById('DimRetscoefficient').textContent = 10000;
 
     // Recalculate and update the charts
     updateCharts();
